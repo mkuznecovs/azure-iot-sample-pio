@@ -1,0 +1,148 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# SPDX-License-Identifier: MIT
+
+menu "Azure IoT middleware for FreeRTOS Sample Configuration"
+
+    config SAMPLE_IOT_WIFI_SSID
+        string "WiFi SSID"
+        default "myssid"
+        help
+            SSID (network name) for the example to connect to.
+
+    config SAMPLE_IOT_WIFI_PASSWORD
+        string "WiFi Password"
+        default "mypassword"
+        help
+            WiFi password (WPA or WPA2) for the example to use.
+            Can be left blank if the network has no security set.
+
+    choice SAMPLE_IOT_WIFI_SCAN_METHOD
+        prompt "WiFi Scan Method"
+        default SAMPLE_IOT_WIFI_SCAN_METHOD_ALL_CHANNEL
+        help
+            WiFi scan method:
+
+            If "Fast" is selected, scan will end after find SSID match AP.
+
+            If "All Channel" is selected, scan will end after scan all the channel.
+
+        config SAMPLE_IOT_WIFI_SCAN_METHOD_FAST
+            bool "Fast"
+        config SAMPLE_IOT_WIFI_SCAN_METHOD_ALL_CHANNEL
+            bool "All Channel"
+    endchoice
+
+    menu "WiFi Scan threshold"
+        config SAMPLE_IOT_WIFI_SCAN_RSSI_THRESHOLD
+            int "WiFi minimum rssi"
+            range -127 0
+
+            default -127
+            help
+                The minimum rssi to accept in the scan mode.
+
+        choice SAMPLE_IOT_WIFI_SCAN_AUTH_MODE_THRESHOLD
+            prompt "WiFi Scan auth mode threshold"
+            default SAMPLE_IOT_WIFI_AUTH_OPEN
+            help
+                The weakest authmode to accept in the scan mode.
+
+            config SAMPLE_IOT_WIFI_AUTH_OPEN
+                bool "OPEN"
+            config SAMPLE_IOT_WIFI_AUTH_WEP
+                bool "WEP"
+            config SAMPLE_IOT_WIFI_AUTH_WPA_PSK
+                bool "WPA PSK"
+            config SAMPLE_IOT_WIFI_AUTH_WPA2_PSK
+                bool "WPA2 PSK"
+            config SAMPLE_IOT_WIFI_AUTH_WPA_WPA2_PSK
+                bool "WPA WPA2 PSK"
+            config SAMPLE_IOT_WIFI_AUTH_WPA2_ENTERPRISE
+                bool "WPA2 ENTERPRISE"
+            config SAMPLE_IOT_WIFI_AUTH_WPA3_PSK
+                bool "WPA3 PSK"
+            config SAMPLE_IOT_WIFI_AUTH_WPA2_WPA3_PSK
+                bool "WPA2 WPA3 PSK"
+            config SAMPLE_IOT_WIFI_AUTH_WAPI_PSK
+                bool "WAPI PSK"
+        endchoice
+    endmenu
+
+    choice SAMPLE_IOT_WIFI_CONNECT_AP_SORT_METHOD
+        prompt "WiFi Connect AP Sort Method"
+        default SAMPLE_IOT_WIFI_CONNECT_AP_BY_SIGNAL
+        help
+            WiFi connect AP sort method:
+
+            If "Signal" is selected, Sort matched APs in scan list by RSSI.
+
+            If "Security" is selected, Sort matched APs in scan list by security mode.
+
+        config SAMPLE_IOT_WIFI_CONNECT_AP_BY_SIGNAL
+            bool "Signal"
+        config SAMPLE_IOT_WIFI_CONNECT_AP_BY_SECURITY
+            bool "Security"
+    endchoice
+
+endmenu
+
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# SPDX-License-Identifier: MIT
+
+menu "Azure IoT middleware for FreeRTOS Main Task Configuration"
+
+    config AZURE_IOT_HUB_FQDN
+        string "Azure IoT Hub FQDN"
+        default "<hostname>.azure-devices.net"
+        help
+            "Set the Azure IoT Hub FQDN."
+
+    config AZURE_IOT_DEVICE_ID
+        string "Azure IoT Device ID"
+        default ""
+        help
+            "Set the Azure IoT Device ID."
+
+    config AZURE_IOT_DEVICE_SYMMETRIC_KEY
+        string "Azure IoT Device Symmetric Key"
+        default ""
+        help
+            "Set the Azure IoT Device Symmetric Key (if using SAS token authentication)."
+
+    config AZURE_IOT_MODULE_ID
+        string "Azure IoT Module ID"
+        default ""
+        help
+            "Set the Azure IoT Module ID (optional for this sample)."
+
+    config ENABLE_DPS_SAMPLE
+        bool "Enable Device Provisioning Sample"
+        default false
+        help
+            Set it to true to enable this sample to be provisioned by Azure Device Provisioning Service.
+
+    config AZURE_DPS_ID_SCOPE
+        string "Azure Device Provisioning Service ID Scope"
+        default ""
+        help
+            "Set the Azure Device Provisioning Service ID Scope."
+
+    config AZURE_DPS_REGISTRATION_ID
+        string "Azure Device Provisioning Service Registration ID"
+        default ""
+        help
+            "Set the Azure Device Provisioning Service Registration ID."
+
+    config AZURE_TASK_STACKSIZE
+        int "Azure Task Stack Size"
+        default 4096
+        help
+            "Set the stack size of the main demo task."
+
+    config NETWORK_BUFFER_SIZE
+        int "MQTT packet buffer size"
+        default 5500
+        help
+            "Set the size of the network buffer for MQTT packets."
+
+endmenu

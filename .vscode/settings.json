@@ -1,0 +1,20 @@
+{
+  "files.associations": {
+    "freertos.h": "c",
+    "transport_socket.h": "c",
+    "esp_sntp.h": "c",
+    "err.h": "c",
+    "opt.h": "c",
+    "lwipopts.h": "c",
+    "poll.h": "c",
+    "sdkconfig.h": "c",
+    "sntp.h": "c",
+    "debug.h": "c",
+    "arch.h": "c",
+    "cc.h": "c",
+    "sys_arch.h": "c",
+    "sample_azure_iot_pnp_data_if.h": "c",
+    "core_http_client.h": "c",
+    "core_http_config.h": "c"
+  }
+}
